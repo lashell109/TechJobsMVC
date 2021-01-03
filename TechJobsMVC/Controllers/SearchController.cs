@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TechJobsMVC.Models;
 
@@ -23,25 +21,11 @@ namespace TechJobsMVC.Controllers
         public IActionResult Results(string searchType, string searchTerm)
         {
             ViewBag.columns = ListController.ColumnChoices;
-            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
-
-            if(string.IsNullOrEmpty(searchTerm))
-            {
-                return View("Index");
-            }
-            if(searchType.Equals("all"))
-            {
-                jobs = JobData.FindByValue(searchTerm);
-                ViewBag.jobs = jobs;
-                ViewBag.title = "All Jobs";
-                return View("Index");
-            }
-            else
-            {
-                jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
-                ViewBag.jobs = jobs;
-                return View("Index");
-            }
+            List<Dictionary<string, string>> jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
+            ViewBag.jobs = jobs;
+            ViewBag.searchType = searchType;
+            ViewBag.searchTerm = searchTerm;
+            return View("Index");
         }
     }
 }

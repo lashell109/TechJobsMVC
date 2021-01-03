@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using TechJobsMVC.Models;
@@ -10,7 +9,7 @@ namespace TechJobsMVC.Controllers
 {
     public class ListController : Controller
     {
-        internal static Dictionary<string, string> ColumnChoices = new Dictionary<string, string>()
+        internal static Dictionary<string, string> ColumnChoices = new Dictionary<string, string>();
         static ListController()
         {
             ColumnChoices.Add("all", "All");
@@ -42,15 +41,16 @@ namespace TechJobsMVC.Controllers
                 ViewBag.title = "All " + ColumnChoices[column] + ": " + "Values";
                 ViewBag.column = column;
                 ViewBag.items = items;
-                return View("Jobs");
-                }
+                return View();
             }
+        }
 
             public IActionResult Jobs(string column, string value)
         {
             List<Dictionary<String, String>> jobs = JobData.FindByColumnAndValue(column, value);
             ViewBag.title = "Jobs with " + ColumnChoices[column] + ":" + value;
             ViewBag.jobs = jobs;
+            ViewBag.column = column;
             return View();
         }
     }

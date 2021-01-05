@@ -1,20 +1,18 @@
-﻿
-
-    <h1>@ViewBag.title</h1>
+﻿<h1>@ViewBag.title</h1>
     
     @{
-        //TODO #1: Use a loop to display job results in a table.
-        @foreach(Dictionary<string, string> jobs in ViewBag.jobs)
+//TODO #1: Use a loop to display job results in a table.
+}
 
+@foreach(Dictionary<string, string> job in ViewBag.jobs)
+{
+    <table class="jon-listing">
+        @foreach (KeyValuePair<string, string> job_fields in job)
         {
-            <table class="job-listing">
-            @foreach (KeyValuePair<string, string> job in jobs)
-            {
-                <tr>
-                    <td>@job.Key</td>
-                    <td>@job.Value</td>
-                </tr>
-            }
-        </table>
-            }
+            <tr>
+                <td>@job_fields.Key</td>
+                <td>@job_fields.Value</td>
+            </tr>
         }
+    </table>
+}

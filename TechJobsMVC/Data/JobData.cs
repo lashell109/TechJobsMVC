@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using TechJobsMVC.Models;
+using TechJobsMVC.Data;
 
 namespace TechJobsMVC.Data
 {
-    public class JobData
+     class JobData
     {
         static private string DATA_FILE = "Data/job_data.csv";
 
